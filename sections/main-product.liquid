@@ -1,1 +1,120 @@
-<section class="section"><div class="container product-page"><div class="gallery">{% for image in product.images %}{{ image | image_url: width:1200 | image_tag: loading:'lazy', class:'product-image', alt:product.title }}{% endfor %}{% if product.metafields.custom.model_3d_url != blank %}<div class="product-3d"><model-viewer src="{{ product.metafields.custom.model_3d_url }}" camera-controls auto-rotate rotation-per-second="14deg" shadow-intensity="1" alt="{{ product.title | escape }}"></model-viewer></div>{% endif %}</div><div class="product-info"><div class="stars">{% if product.metafields.custom.rating != blank %}{{ product.metafields.custom.rating }}{% else %}★★★★★{% endif %} <span>{% if product.metafields.custom.review_count != blank %}{{ product.metafields.custom.review_count }} reviews{% else %}Trusted by KitchiFix customers{% endif %}</span></div><h1>{{ product.title }}</h1>{% render 'product-meta', product: product %}<div class="product-price"><b>{{ product.selected_or_first_available_variant.price | money }}</b>{% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s><span class="save">Save {{ product.compare_at_price | minus: product.price | money }}</span>{% endif %}</div><div class="description">{{ product.description }}</div>{% form 'product', product, class:'product-form' %}{% unless product.has_only_default_variant %}{% for option in product.options_with_values %}<label>{{ option.name }}<select name="options[{{ option.name | escape }}]">{% for value in option.values %}<option value="{{ value | escape }}">{{ value }}</option>{% endfor %}</select></label>{% endfor %}{% endunless %}<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><label>Quantity<input type="number" name="quantity" value="1" min="1"></label><button class="btn primary large full" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>{% endform %}<div class="perks">✓ Secure checkout<br>✓ Easy returns<br>✓ Support when you need it</div></div></div></section>{% schema %}{"name":"Main product","settings":[]}{% endschema %}
+<section class="section kf-product" data-product-root>
+  <div class="container product-page">
+    <div class="gallery">
+      {% for image in product.images %}
+        {{ image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'product-image', alt: image.alt | default: product.title | escape }}
+      {% endfor %}
+      {% if product.metafields.custom.model_3d_url != blank %}
+        <div class="product-3d"><model-viewer src="{{ product.metafields.custom.model_3d_url }}" camera-controls auto-rotate rotation-per-second="14deg" shadow-intensity="1" alt="{{ product.title | escape }}"></model-viewer><span class="kf-3d-label">3D VIEW</span></div>
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      <div class="stars">{% if product.metafields.custom.rating != blank %}{{ product.metafields.custom.rating }}{% else %}★★★★★{% endif %} <span>{% if product.metafields.custom.review_count != blank %}{{ product.metafields.custom.review_count }} reviews{% else %}KitchiFix customer favourite{% endif %}</span></div>
+      <h1>{{ product.title }}</h1>
+      {% render 'product-meta', product: product %}
+
+      <div class="product-price" data-price>
+        <b>{{ product.selected_or_first_available_variant.price | money }}</b>
+        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+          <s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+          <span class="save">Save {{ product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | money }}</span>
+        {% endif %}
+      </div>
+
+      {% if product.description != blank %}<div class="description">{{ product.description }}</div>{% endif %}
+
+      {% form 'product', product, class: 'product-form', id: 'KfProductForm' %}
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <label class="kf-option-label">{{ option.name }}
+              <select class="kf-option" data-option-position="{{ option.position }}" aria-label="{{ option.name }}">
+                {% for value in option.values %}<option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>{% endfor %}
+              </select>
+            </label>
+          {% endfor %}
+        {% endunless %}
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-id>
+        <label>Quantity<input class="kf-quantity" type="number" name="quantity" value="1" min="1" inputmode="numeric"></label>
+        <button class="btn primary large full kf-add" type="submit" {% unless product.available %}disabled{% endunless %}>
+          <span>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          <span>→</span>
+        </button>
+        {% if product.available %}{{ form | payment_button }}{% endif %}
+      {% endform %}
+
+      <div class="perks">
+        <div><b>✓</b><span>Secure Shopify checkout</span></div>
+        <div><b>✓</b><span>Clear product information</span></div>
+        <div><b>✓</b><span>KitchiFix customer support</span></div>
+      </div>
+
+      <div class="kf-product-details">
+        <details open><summary>Why you'll love it <span>+</span></summary><p>Designed around practical everyday kitchen use, with a focus on convenience and simple functionality.</p></details>
+        <details><summary>Product information <span>+</span></summary><p>Review the product description and available options above before adding it to your cart.</p></details>
+      </div>
+    </div>
+  </div>
+
+  <div class="kf-sticky-buy" data-sticky-buy>
+    <div><strong>{{ product.title }}</strong><span data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span></div>
+    <button type="button" class="btn primary" data-sticky-add {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart →{% else %}Sold out{% endif %}</button>
+  </div>
+</section>
+
+<script type="application/json" id="KfProductVariants">{{ product.variants | json }}</script>
+<script>
+(() => {
+  const root = document.querySelector('[data-product-root]');
+  if (!root) return;
+  const form = root.querySelector('#KfProductForm');
+  const variants = JSON.parse(document.getElementById('KfProductVariants').textContent || '[]');
+  const options = [...root.querySelectorAll('.kf-option')];
+  const idInput = root.querySelector('[data-variant-id]');
+  const price = root.querySelector('[data-price]');
+  const stickyPrice = root.querySelector('[data-sticky-price]');
+  const sticky = root.querySelector('[data-sticky-buy]');
+  const stickyAdd = root.querySelector('[data-sticky-add]');
+  const add = root.querySelector('.kf-add');
+  const money = (cents) => new Intl.NumberFormat('{{ localization.language.iso_code }}', { style:'currency', currency:'{{ cart.currency.iso_code }}' }).format(cents / 100);
+
+  function selectedVariant() {
+    const values = options.map(s => s.value);
+    return variants.find(v => v.options.every((value, i) => value === values[i])) || null;
+  }
+
+  function update() {
+    const variant = selectedVariant();
+    if (!variant) {
+      if (add) { add.disabled = true; add.querySelector('span').textContent = 'Unavailable'; }
+      if (stickyAdd) stickyAdd.disabled = true;
+      return;
+    }
+    idInput.value = variant.id;
+    const formatted = money(variant.price);
+    if (stickyPrice) stickyPrice.textContent = formatted;
+    if (price) {
+      const compare = variant.compare_at_price && variant.compare_at_price > variant.price ? `<s>${money(variant.compare_at_price)}</s><span class="save">Save ${money(variant.compare_at_price - variant.price)}</span>` : '';
+      price.innerHTML = `<b>${formatted}</b>${compare}`;
+    }
+    const available = variant.available;
+    if (add) { add.disabled = !available; add.querySelector('span').textContent = available ? 'Add to cart' : 'Sold out'; }
+    if (stickyAdd) { stickyAdd.disabled = !available; stickyAdd.textContent = available ? 'Add to cart →' : 'Sold out'; }
+  }
+
+  options.forEach(s => s.addEventListener('change', update));
+  if (stickyAdd && form) stickyAdd.addEventListener('click', () => form.requestSubmit());
+  if (sticky) {
+    const observer = new IntersectionObserver(([entry]) => sticky.classList.toggle('is-visible', !entry.isIntersecting), { threshold: 0 });
+    observer.observe(form);
+  }
+  update();
+})();
+</script>
+
+<style>
+.kf-product{position:relative}.kf-product .product-page{align-items:start}.kf-product .gallery{position:relative}.kf-product .product-image,.kf-product .product-3d{border-radius:3px}.kf-3d-label{position:absolute;right:18px;top:18px;padding:7px 10px;background:rgba(13,13,11,.8);color:#e8dfcc;font-size:9px;letter-spacing:.18em}.kf-option-label{display:block;margin-top:18px}.kf-option{width:100%;margin-top:8px}.kf-add{display:flex;justify-content:space-between;align-items:center}.perks{display:grid;gap:9px;margin-top:22px;padding:18px 0;border-top:1px solid rgba(23,23,20,.1);border-bottom:1px solid rgba(23,23,20,.1)}.perks div{display:flex;gap:10px;align-items:center;font-size:12px;color:#6e6a62}.perks b{color:#a88958}.kf-product-details{margin-top:22px;border-top:1px solid rgba(23,23,20,.1)}.kf-product-details details{border-bottom:1px solid rgba(23,23,20,.1);padding:16px 0}.kf-product-details summary{display:flex;justify-content:space-between;cursor:pointer;font-size:13px;font-weight:600;list-style:none}.kf-product-details summary::-webkit-details-marker{display:none}.kf-product-details details[open] summary span{transform:rotate(45deg)}.kf-product-details summary span{transition:.25s}.kf-product-details p{margin:12px 0 0;font-size:13px}.kf-sticky-buy{position:fixed;left:50%;bottom:18px;z-index:50;width:min(720px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 14px 12px 20px;background:rgba(16,16,14,.94);border:1px solid rgba(188,161,107,.25);box-shadow:0 20px 60px rgba(0,0,0,.25);backdrop-filter:blur(18px);transform:translate(-50%,130%);transition:transform .4s cubic-bezier(.2,.8,.2,1);color:#f3eee5}.kf-sticky-buy.is-visible{transform:translate(-50%,0)}.kf-sticky-buy>div{display:flex;flex-direction:column;gap:4px;min-width:0}.kf-sticky-buy strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kf-sticky-buy span{color:#bca16b;font-size:12px}.kf-sticky-buy .btn{white-space:nowrap}@media(max-width:700px){.kf-sticky-buy{bottom:10px;width:calc(100% - 20px);padding:10px}.kf-sticky-buy strong{max-width:180px}.kf-sticky-buy .btn{padding:12px 14px}.kf-product .gallery{display:block}}
+</style>
+
+{% schema %}{"name":"Main product","settings":[]}{% endschema %}
