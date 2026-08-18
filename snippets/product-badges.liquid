@@ -1,0 +1,1 @@
+<div class="product-badges">{% if product.metafields.custom.badge != blank %}<span class="badge">{{ product.metafields.custom.badge }}</span>{% elsif product.compare_at_price > product.price %}<span class="badge">Sale</span>{% endif %}{% if product.metafields.custom.badge_2 != blank %}<span class="badge secondary">{{ product.metafields.custom.badge_2 }}</span>{% endif %}</div>
