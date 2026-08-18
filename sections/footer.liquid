@@ -8,22 +8,47 @@
       <p>{{ settings.brand_tagline }}</p>
     </div>
 
-    <nav class="kf-footer__links" aria-label="Footer navigation">
-      <a href="{{ routes.root_url }}">Home</a>
-      <a href="{{ routes.collections_url }}">Collections</a>
-      <a href="{{ routes.all_products_collection_url }}?sort_by=created-descending">New Arrivals</a>
-      <a href="{{ routes.cart_url }}">Cart</a>
-    </nav>
+    <div class="kf-footer__group">
+      <h3>Shop</h3>
+      <nav class="kf-footer__links" aria-label="Shop navigation">
+        <a href="{{ routes.all_products_collection_url }}">All products</a>
+        <a href="{{ routes.all_products_collection_url }}?sort_by=best-selling">Best sellers</a>
+        <a href="{{ routes.all_products_collection_url }}?sort_by=created-descending">New arrivals</a>
+        <a href="{{ routes.collections_url }}">Collections</a>
+      </nav>
+    </div>
 
-    <div class="kf-footer__social">
-      {% if section.settings.instagram != blank %}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
-      {% if section.settings.facebook != blank %}<a href="{{ section.settings.facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif %}
-      {% if section.settings.tiktok != blank %}<a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener">TikTok</a>{% endif %}
+    <div class="kf-footer__group">
+      <h3>Help</h3>
+      <nav class="kf-footer__links" aria-label="Help and policy navigation">
+        <a href="{{ routes.contact_url }}">Contact</a>
+        {% if shop.shipping_policy != blank %}<a href="{{ shop.shipping_policy.url }}">Shipping</a>{% endif %}
+        {% if shop.refund_policy != blank %}<a href="{{ shop.refund_policy.url }}">Returns &amp; refunds</a>{% endif %}
+        {% if shop.privacy_policy != blank %}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{% endif %}
+        {% if shop.terms_of_service != blank %}<a href="{{ shop.terms_of_service.url }}">Terms</a>{% endif %}
+        {% if shop.contact_information != blank %}<a href="{{ shop.contact_information.url }}">Contact information</a>{% endif %}
+        {% if shop.legal_notice != blank %}<a href="{{ shop.legal_notice.url }}">Legal notice</a>{% endif %}
+      </nav>
+    </div>
+
+    <div class="kf-footer__group">
+      <h3>Follow</h3>
+      <nav class="kf-footer__links kf-footer__social" aria-label="Social media">
+        {% if section.settings.instagram != blank %}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener noreferrer">Instagram ↗</a>{% endif %}
+        {% if section.settings.facebook != blank %}<a href="{{ section.settings.facebook }}" target="_blank" rel="noopener noreferrer">Facebook ↗</a>{% endif %}
+        {% if section.settings.tiktok != blank %}<a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok ↗</a>{% endif %}
+      </nav>
     </div>
   </div>
 
   <div class="kf-footer__bottom">
-    <span>© {{ 'now' | date: '%Y' }} {{ settings.brand_name }}.</span>
+    <div class="kf-footer__legal">
+      <span>© {{ 'now' | date: '%Y' }} {{ settings.brand_name }}.</span>
+      {% if shop.privacy_policy != blank %}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{% endif %}
+      {% if shop.terms_of_service != blank %}<a href="{{ shop.terms_of_service.url }}">Terms</a>{% endif %}
+      {% if shop.shipping_policy != blank %}<a href="{{ shop.shipping_policy.url }}">Shipping</a>{% endif %}
+      {% if shop.refund_policy != blank %}<a href="{{ shop.refund_policy.url }}">Returns</a>{% endif %}
+    </div>
     <span>Thoughtful tools. Beautifully simple.</span>
   </div>
 </footer>
@@ -40,9 +65,9 @@
   margin:0 auto;
   padding:0 28px 30px;
   display:grid;
-  grid-template-columns:1.4fr 1fr auto;
-  align-items:center;
-  gap:55px;
+  grid-template-columns:1.35fr .8fr 1.15fr .75fr;
+  align-items:start;
+  gap:42px;
   border-bottom:1px solid rgba(255,255,255,.08)
 }
 .kf-footer__brand{
@@ -66,50 +91,66 @@
   font-weight:700
 }
 .kf-footer__main p{
+  max-width:230px;
   margin:10px 0 0;
   color:#77756d;
   font-size:12px;
   line-height:1.5
 }
-.kf-footer__links,
-.kf-footer__social{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  flex-wrap:wrap
+.kf-footer__group h3{
+  margin:2px 0 14px;
+  color:#f1eee6;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em
 }
-.kf-footer__links a,
-.kf-footer__social a{
+.kf-footer__links{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px
+}
+.kf-footer__links a{
   color:#aaa79e;
   text-decoration:none;
   font-size:11px;
-  letter-spacing:.04em;
-  transition:color .2s ease
+  line-height:1.35;
+  letter-spacing:.02em;
+  transition:color .2s ease,transform .2s ease
 }
-.kf-footer__links a:hover,
-.kf-footer__social a:hover{color:#c0a66f}
+.kf-footer__links a:hover{color:#c0a66f;transform:translateX(2px)}
+.kf-footer__social{gap:10px}
 .kf-footer__bottom{
   max-width:1180px;
   margin:0 auto;
   padding:15px 28px 0;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
   color:#5f5d57;
   font-size:9px;
   letter-spacing:.08em;
   text-transform:uppercase
 }
-@media(max-width:850px){
-  .kf-footer__inner{grid-template-columns:1fr;gap:22px;padding-bottom:25px}
-  .kf-footer__links,.kf-footer__social{gap:18px}
+.kf-footer__legal{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.kf-footer__legal a{color:#6f6d66;text-decoration:none;transition:color .2s ease}
+.kf-footer__legal a:hover{color:#c0a66f}
+@media(max-width:900px){
+  .kf-footer__inner{grid-template-columns:1fr 1fr;gap:30px 35px}
+  .kf-footer__main{grid-column:1/-1}
+  .kf-footer__main p{max-width:300px}
 }
 @media(max-width:600px){
   .kf-footer{padding:30px 0 15px}
-  .kf-footer__inner{padding:0 20px 22px;gap:20px}
+  .kf-footer__inner{grid-template-columns:1fr 1fr;padding:0 20px 24px;gap:28px 18px}
+  .kf-footer__main{grid-column:1/-1}
+  .kf-footer__group h3{margin-bottom:12px}
+  .kf-footer__links{gap:8px}
+  .kf-footer__links a{font-size:10px}
   .kf-footer__bottom{padding:13px 20px 0;display:block;line-height:1.8}
-  .kf-footer__bottom span{display:block}
-  .kf-footer__bottom span+span{margin-top:3px}
+  .kf-footer__legal{gap:9px}
+  .kf-footer__bottom>span{display:block;margin-top:5px}
 }
 </style>
 
