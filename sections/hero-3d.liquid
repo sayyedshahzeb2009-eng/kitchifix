@@ -1,1 +1,74 @@
-<section class="hero premium-hero"><div class="hero-noise"></div><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">{{ section.settings.eyebrow }}</div><h1>{{ section.settings.heading }}</h1><p>{{ section.settings.text }}</p><div class="hero-buttons">{% if section.settings.primary_link != blank %}<a class="btn primary large" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }} <span>↗</span></a>{% endif %}{% if section.settings.secondary_link != blank %}<a class="btn ghost large" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>{% endif %}</div><div class="hero-proof"><div class="proof-avatars"><i></i><i></i><i></i></div><div><strong>4.9/5</strong><span>from 1,000+ happy kitchens</span></div></div></div><div class="hero-visual" data-tilt><div class="hero-product-shadow"></div>{% if settings.enable_3d and section.settings.model_url != blank %}<model-viewer src="{{ section.settings.model_url }}" camera-controls auto-rotate rotation-per-second="12deg" shadow-intensity="1" exposure="1.1" alt="{{ section.settings.heading | escape }}"></model-viewer>{% elsif section.settings.image != blank %}{{ section.settings.image | image_url: width:1400 | image_tag: class:'hero-image', loading:'eager', alt:section.settings.heading }}{% else %}<div class="hero-product-placeholder"><span>K</span></div>{% endif %}<div class="hero-floating-card card-one"><span>✦</span><div><b>Smart essentials</b><small>Made for everyday life</small></div></div><div class="hero-floating-card card-two"><b>★★★★★</b><small>Customer favourite</small></div></div></div></section>{% schema %}{"name":"KitchiFix Premium Hero","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"KITCHIFIX • SMART KITCHEN ESSENTIALS"},{"type":"text","id":"heading","label":"Heading","default":"Make your kitchen feel effortless."},{"type":"textarea","id":"text","label":"Text","default":"Clever everyday products, beautifully designed to save space, time and effort."},{"type":"text","id":"primary_label","label":"Primary button","default":"Shop best sellers"},{"type":"url","id":"primary_link","label":"Primary link"},{"type":"text","id":"secondary_label","label":"Secondary button","default":"Explore collection"},{"type":"url","id":"secondary_link","label":"Secondary link"},{"type":"image_picker","id":"image","label":"Product hero image"},{"type":"url","id":"model_url","label":"3D product model URL (.glb/.gltf)"}],"presets":[{"name":"KitchiFix Premium Hero"}]}{% endschema %}
+<section class="hero premium-hero">
+  <div class="hero-noise"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.text }}</p>
+      <div class="hero-buttons">
+        {% if section.settings.primary_link != blank %}<a class="btn primary large" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }} <span>↗</span></a>{% endif %}
+        {% if section.settings.secondary_link != blank %}<a class="btn ghost large" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>{% endif %}
+      </div>
+      <div class="hero-proof"><div class="proof-avatars"><i></i><i></i><i></i></div><div><strong>4.9/5</strong><span>from 1,000+ happy kitchens</span></div></div>
+    </div>
+
+    <div class="hero-visual kf-hero-stage" data-tilt>
+      <div class="hero-product-shadow"></div>
+      {% if settings.enable_3d and section.settings.model_url != blank %}
+        <model-viewer src="{{ section.settings.model_url }}" camera-controls auto-rotate rotation-per-second="12deg" shadow-intensity="1" exposure="1.1" alt="{{ section.settings.heading | escape }}"></model-viewer>
+      {% elsif section.settings.image != blank %}
+        {{ section.settings.image | image_url: width:1400 | image_tag: class:'hero-image', loading:'eager', alt:section.settings.heading }}
+      {% else %}
+        <div class="kf-kitchen-scene" aria-label="KitchiFix kitchen essentials">
+          <div class="kf-scene-glow"></div>
+          <div class="kf-pedestal"><span>EVERYDAY<br>ESSENTIALS</span></div>
+          <div class="kf-pan"><i></i><b></b></div>
+          <div class="kf-jar"><span></span><i></i></div>
+          <div class="kf-board"><span></span><i></i></div>
+          <div class="kf-spoon"><i></i></div>
+          <div class="kf-orbit kf-orbit-one"></div>
+          <div class="kf-orbit kf-orbit-two"></div>
+        </div>
+      {% endif %}
+
+      <div class="hero-floating-card card-one"><span>✦</span><div><b>Smart essentials</b><small>Made for everyday life</small></div></div>
+      <div class="hero-floating-card card-two"><b>★★★★★</b><small>Customer favourite</small></div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* KitchiFix hero — premium product-studio fallback visual */
+.kf-hero-stage{isolation:isolate}
+.kf-kitchen-scene{position:relative;width:min(590px,90%);aspect-ratio:1/0.86;display:grid;place-items:center;filter:drop-shadow(0 35px 45px rgba(20,25,21,.14))}
+.kf-scene-glow{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#d7ddd5 0%,#e8e9e2 48%,transparent 70%);opacity:.95}
+.kf-pedestal{position:absolute;z-index:2;bottom:10%;width:58%;height:24%;border-radius:50% 50% 20% 20%/35% 35% 12% 12%;background:linear-gradient(145deg,#faf9f5,#d5d4cd);box-shadow:inset 0 -22px 28px rgba(35,38,33,.10),0 25px 35px rgba(35,38,33,.12);display:grid;place-items:center;transform:perspective(500px) rotateX(8deg)}
+.kf-pedestal:before{content:"";position:absolute;top:-8%;width:100%;height:25%;border-radius:50%;background:#f8f7f2;box-shadow:inset 0 -7px 12px rgba(35,38,33,.08)}
+.kf-pedestal span{position:relative;margin-top:13px;font-size:9px;font-weight:800;letter-spacing:.2em;line-height:1.6;text-align:center;color:#777970}
+.kf-pan{position:absolute;z-index:5;left:13%;top:22%;width:145px;height:78px;border-radius:50%;background:linear-gradient(145deg,#323833,#111512);transform:rotate(-18deg);box-shadow:0 20px 25px rgba(0,0,0,.18)}
+.kf-pan:after{content:"";position:absolute;right:-66px;top:29px;width:82px;height:16px;border-radius:99px;background:#222723;transform:rotate(7deg);box-shadow:0 7px 8px rgba(0,0,0,.12)}
+.kf-pan i{position:absolute;inset:13px;border-radius:50%;border:1px solid rgba(255,255,255,.13)}
+.kf-pan b{position:absolute;width:28px;height:28px;left:58px;top:25px;border-radius:50%;background:radial-gradient(circle,#6c746c,#252b27)}
+.kf-jar{position:absolute;z-index:6;right:16%;top:18%;width:82px;height:132px;border-radius:18px 18px 24px 24px;background:linear-gradient(100deg,#d9d7cb,#f7f5ed 55%,#b9b9ae);box-shadow:inset -10px 0 16px rgba(0,0,0,.08),0 20px 30px rgba(0,0,0,.13);transform:rotate(7deg)}
+.kf-jar:before{content:"";position:absolute;left:10px;right:10px;top:-13px;height:23px;border-radius:7px;background:#242924;box-shadow:0 3px 4px rgba(0,0,0,.15)}
+.kf-jar span{position:absolute;left:12px;right:12px;top:54px;height:31px;background:#ece9de;border:1px solid rgba(30,32,29,.08)}
+.kf-jar i{position:absolute;left:22px;right:22px;top:63px;height:4px;background:#a28e6d}
+.kf-board{position:absolute;z-index:4;right:7%;bottom:27%;width:122px;height:160px;border-radius:16px 16px 28px 28px;background:linear-gradient(140deg,#a98965,#d5b996);transform:rotate(18deg);box-shadow:0 25px 30px rgba(55,38,20,.17)}
+.kf-board:before{content:"";position:absolute;top:13px;left:47px;width:28px;height:10px;border:2px solid rgba(255,255,255,.45);border-radius:99px}
+.kf-board span{position:absolute;left:20px;right:20px;top:56px;height:2px;background:rgba(255,255,255,.25);box-shadow:0 12px rgba(255,255,255,.2),0 24px rgba(255,255,255,.18)}
+.kf-board i{position:absolute;left:18px;bottom:17px;width:84px;height:4px;background:rgba(70,49,28,.2);border-radius:50%}
+.kf-spoon{position:absolute;z-index:7;left:37%;top:10%;width:14px;height:185px;border-radius:99px;background:linear-gradient(90deg,#bbb8ae,#f1eee5,#9b988e);transform:rotate(27deg);box-shadow:0 12px 18px rgba(0,0,0,.12)}
+.kf-spoon i{position:absolute;top:-29px;left:-15px;width:43px;height:58px;border-radius:50%;border:7px solid #c4c1b8;background:#ebe9e1}
+.kf-orbit{position:absolute;border:1px solid rgba(104,113,103,.17);border-radius:50%;pointer-events:none}
+.kf-orbit-one{width:100%;height:100%;transform:rotate(18deg)}
+.kf-orbit-two{width:74%;height:74%;transform:rotate(-25deg);border-color:rgba(162,142,106,.18)}
+.kf-kitchen-scene>*:not(.kf-scene-glow):not(.kf-orbit){animation:kfSceneFloat 6s ease-in-out infinite}
+.kf-jar{animation-delay:-1s!important}.kf-board{animation-delay:-2.2s!important}.kf-spoon{animation-delay:-3s!important}.kf-pan{animation-delay:-4s!important}
+@keyframes kfSceneFloat{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@media(max-width:720px){.kf-kitchen-scene{width:100%;max-width:440px}.kf-pan{width:110px;height:60px}.kf-pan:after{right:-50px;width:60px}.kf-jar{width:65px;height:108px}.kf-board{width:95px;height:125px}.kf-spoon{height:145px}}
+@media(prefers-reduced-motion:reduce){.kf-kitchen-scene>*{animation:none!important}}
+</style>
+
+{% schema %}
+{"name":"KitchiFix Premium Hero","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"KITCHIFIX • SMART KITCHEN ESSENTIALS"},{"type":"text","id":"heading","label":"Heading","default":"Make your kitchen feel effortless."},{"type":"textarea","id":"text","label":"Text","default":"Clever everyday products, beautifully designed to save space, time and effort."},{"type":"text","id":"primary_label","label":"Primary button","default":"Shop best sellers"},{"type":"url","id":"primary_link","label":"Primary link"},{"type":"text","id":"secondary_label","label":"Secondary button","default":"Explore collection"},{"type":"url","id":"secondary_link","label":"Secondary link"},{"type":"image_picker","id":"image","label":"Product hero image"},{"type":"url","id":"model_url","label":"3D product model URL (.glb/.gltf)"}],"presets":[{"name":"KitchiFix Premium Hero"}]}
+{% endschema %}
