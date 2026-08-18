@@ -1,0 +1,64 @@
+<style>
+  html { scroll-behavior: smooth; }
+  body { overflow-x: hidden; }
+
+  /* Calm, stable scroll reveal — no 3D/parallax movement */
+  #MainContent > .shopify-section,
+  #MainContent > section,
+  #MainContent > div:not(.shopify-section),
+  .kf-scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .65s ease, transform .65s cubic-bezier(.22,.61,.36,1);
+  }
+
+  #MainContent > .shopify-section.kf-revealed,
+  #MainContent > section.kf-revealed,
+  #MainContent > div:not(.shopify-section).kf-revealed,
+  .kf-scroll-reveal.kf-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Keep the actual page completely stable while only the entrance state changes */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #MainContent > .shopify-section,
+    #MainContent > section,
+    #MainContent > div:not(.shopify-section),
+    .kf-scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var items = document.querySelectorAll(
+    '#MainContent > .shopify-section, #MainContent > section, #MainContent > div:not(.shopify-section), .kf-scroll-reveal'
+  );
+
+  if (!items.length || !('IntersectionObserver' in window)) {
+    items.forEach(function (item) { item.classList.add('kf-revealed'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('kf-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  items.forEach(function (item) { observer.observe(item); });
+})();
+</script>
