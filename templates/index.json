@@ -6,16 +6,30 @@
         "eyebrow": "KITCHIFIX • SMART KITCHEN ESSENTIALS",
         "heading": "Make your kitchen feel effortless.",
         "text": "Clever everyday products, beautifully designed to save space, time and effort.",
-        "primary_label": "Shop best sellers",
+        "primary_label": "Shop the collection",
         "primary_link": "/collections/all",
-        "secondary_label": "Explore the collection",
-        "secondary_link": "/collections/all"
+        "secondary_label": "Discover what’s new",
+        "secondary_link": "/collections/all?sort_by=created-descending"
       }
     },
     "trust": { "type": "trust-badges" },
-    "products": {
+    "collection": {
       "type": "featured-products",
-      "settings": { "eyebrow": "THE KITCHIFIX EDIT", "heading": "Best sellers", "limit": 4 }
+      "settings": {
+        "eyebrow": "THE KITCHIFIX COLLECTION",
+        "heading": "Designed for better kitchens",
+        "collection": "all",
+        "limit": 4,
+        "link": "/collections/all"
+      }
+    },
+    "new_arrivals": {
+      "type": "new-arrivals",
+      "settings": {
+        "heading": "Fresh arrivals",
+        "text": "Discover the latest KitchiFix essentials, selected to bring a smarter, cleaner feel to your kitchen.",
+        "limit": 4
+      }
     },
     "categories": {
       "type": "categories",
@@ -38,89 +52,26 @@
         "subheading": "From 1,000+ customer experiences"
       },
       "blocks": {
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "quote": "The product feels beautifully considered and has made my daily kitchen routine much easier.",
-            "name": "Aarav",
-            "meta": "Verified KitchiFix customer",
-            "label": "Verified purchase"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "quote": "Beautiful quality, simple to use and it genuinely looks premium on my kitchen counter.",
-            "name": "Meera",
-            "meta": "Verified KitchiFix customer",
-            "label": "Verified purchase"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "quote": "A small upgrade that makes a surprisingly big difference every day. I would buy it again.",
-            "name": "Rohan",
-            "meta": "Verified KitchiFix customer",
-            "label": "Verified purchase"
-          }
-        }
+        "review_1": { "type": "review", "settings": { "quote": "The product feels beautifully considered and has made my daily kitchen routine much easier.", "name": "Aarav", "meta": "Verified KitchiFix customer", "label": "Verified purchase" } },
+        "review_2": { "type": "review", "settings": { "quote": "Beautiful quality, simple to use and it genuinely looks premium on my kitchen counter.", "name": "Meera", "meta": "Verified KitchiFix customer", "label": "Verified purchase" } },
+        "review_3": { "type": "review", "settings": { "quote": "A small upgrade that makes a surprisingly big difference every day. I would buy it again.", "name": "Rohan", "meta": "Verified KitchiFix customer", "label": "Verified purchase" } }
       },
       "block_order": ["review_1", "review_2", "review_3"]
     },
     "faq": {
       "type": "faq",
-      "settings": {
-        "heading": "Questions, answered.",
-        "text": "Everything you need before you order."
-      },
+      "settings": { "heading": "Questions, answered.", "text": "Everything you need before you order." },
       "blocks": {
-        "faq_1": {
-          "type": "faq",
-          "settings": {
-            "question": "How long does delivery take?",
-            "answer": "<p>Most orders are processed quickly and delivered according to the shipping estimate shown at checkout. Delivery times can vary by location.</p>"
-          }
-        },
-        "faq_2": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I track my order?",
-            "answer": "<p>Yes. Once your order is dispatched, tracking information will be provided so you can follow its progress.</p>"
-          }
-        },
-        "faq_3": {
-          "type": "faq",
-          "settings": {
-            "question": "What if my product arrives damaged?",
-            "answer": "<p>Contact KitchiFix support as soon as possible with your order details and clear photos of the package and product. We will help with the next steps.</p>"
-          }
-        },
-        "faq_4": {
-          "type": "faq",
-          "settings": {
-            "question": "Are KitchiFix products easy to use?",
-            "answer": "<p>Yes. KitchiFix focuses on practical kitchen upgrades designed to be intuitive, useful and easy to fit into everyday routines.</p>"
-          }
-        },
-        "faq_5": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I return an item?",
-            "answer": "<p>Returns depend on the applicable store return policy and the condition of the item. Please check the current return policy before ordering.</p>"
-          }
-        },
-        "faq_6": {
-          "type": "faq",
-          "settings": {
-            "question": "How can I contact KitchiFix?",
-            "answer": "<p>Use the contact details provided in the store footer or contact page and include your order number when asking about an existing order.</p>"
-          }
-        }
+        "faq_1": { "type": "faq", "settings": { "question": "How long does delivery take?", "answer": "<p>Most orders are processed quickly and delivered according to the shipping estimate shown at checkout. Delivery times can vary by location.</p>" } },
+        "faq_2": { "type": "faq", "settings": { "question": "Can I track my order?", "answer": "<p>Yes. Once your order is dispatched, tracking information will be provided so you can follow its progress.</p>" } },
+        "faq_3": { "type": "faq", "settings": { "question": "What if my product arrives damaged?", "answer": "<p>Contact KitchiFix support as soon as possible with your order details and clear photos of the package and product. We will help with the next steps.</p>" } },
+        "faq_4": { "type": "faq", "settings": { "question": "Are KitchiFix products easy to use?", "answer": "<p>Yes. KitchiFix focuses on practical kitchen upgrades designed to be intuitive, useful and easy to fit into everyday routines.</p>" } },
+        "faq_5": { "type": "faq", "settings": { "question": "Can I return an item?", "answer": "<p>Returns depend on the applicable store return policy and the condition of the item. Please check the current return policy before ordering.</p>" } },
+        "faq_6": { "type": "faq", "settings": { "question": "How can I contact KitchiFix?", "answer": "<p>Use the contact details provided in the store footer or contact page and include your order number when asking about an existing order.</p>" } }
       },
       "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5", "faq_6"]
     },
     "newsletter": { "type": "newsletter" }
   },
-  "order": ["hero", "trust", "products", "categories", "showcase", "problem", "reviews", "faq", "newsletter"]
+  "order": ["hero", "trust", "collection", "new_arrivals", "categories", "showcase", "problem", "reviews", "faq", "newsletter"]
 }
