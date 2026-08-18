@@ -1,1 +1,538 @@
-<section class="kf-404"><div class="kf-404-orbit one"></div><div class="kf-404-orbit two"></div><div class="kf-404-inner"><div class="kf-404-code">404</div><span class="kf-eyebrow">KITCHIFIX / LOST IN THE KITCHEN</span><h1>This page went<br><em>missing.</em></h1><p>Looks like this page has moved or no longer exists. Let’s get you back to the good stuff.</p><div class="kf-404-actions"><a href="{{ routes.root_url }}" class="kf-btn primary">Back to home <span>→</span></a><a href="{{ routes.all_products_collection_url }}" class="kf-btn secondary">Shop KitchiFix</a></div></div></section><style>.kf-404{min-height:calc(100vh - 90px);display:grid;place-items:center;position:relative;overflow:hidden;background:#090908;color:#f2eee5;text-align:center;padding:80px 24px}.kf-404-inner{position:relative;z-index:2;max-width:760px}.kf-404-code{font-size:clamp(100px,19vw,230px);font-weight:700;line-height:.75;letter-spacing:-.09em;color:rgba(190,161,105,.1);margin-bottom:-5px}.kf-eyebrow{display:inline-block;color:#bca16b;font-size:10px;font-weight:700;letter-spacing:.24em;margin-bottom:24px}.kf-404 h1{font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-.045em;font-weight:500;margin:0 0 24px}.kf-404 em{font-family:Georgia,serif;color:#c4a86f;font-weight:400}.kf-404 p{max-width:540px;margin:0 auto 38px;color:#99958c;font-size:17px;line-height:1.75}.kf-404-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.kf-btn{display:inline-flex;align-items:center;gap:28px;padding:16px 23px;text-decoration:none;font-size:12px;letter-spacing:.05em;transition:.3s}.kf-btn.primary{background:#bca16b;color:#090908}.kf-btn.primary:hover{background:#d0b67d;transform:translateY(-2px)}.kf-btn.secondary{border:1px solid rgba(255,255,255,.18);color:#eee8da}.kf-btn.secondary:hover{border-color:#bca16b;color:#bca16b}.kf-404-orbit{position:absolute;border:1px solid rgba(188,161,107,.12);border-radius:50%;pointer-events:none}.kf-404-orbit.one{width:620px;height:620px;right:-260px;top:-170px}.kf-404-orbit.two{width:420px;height:420px;left:-210px;bottom:-180px}.kf-404:after{content:"";position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(188,161,107,.09),transparent 68%);top:10%;left:50%;transform:translateX(-50%)}@media(max-width:600px){.kf-404{min-height:70vh}.kf-404-actions{flex-direction:column;align-items:stretch}.kf-btn{justify-content:center}.kf-404-code{font-size:110px}}{% schema %}{"name":"404 Page","settings":[]}{% endschema %}
+<section class="kf404">
+  <div class="kf404__glow kf404__glow--one"></div>
+  <div class="kf404__glow kf404__glow--two"></div>
+  <div class="kf404__ring kf404__ring--one"></div>
+  <div class="kf404__ring kf404__ring--two"></div>
+
+  <div class="kf404__content">
+
+    <div class="kf404__number" aria-hidden="true">404</div>
+
+    <div class="kf404__eyebrow">
+      <span></span>
+      KITCHIFIX / PAGE NOT FOUND
+      <span></span>
+    </div>
+
+    <h1 class="kf404__title">
+      Something went<br>
+      <em>off the menu.</em>
+    </h1>
+
+    <p class="kf404__text">
+      The page you're looking for isn't available anymore.
+      Don't worry — let's get you back to the KitchiFix collection.
+    </p>
+
+    <div class="kf404__actions">
+
+      <a
+        href="{{ routes.root_url }}"
+        class="kf404__button kf404__button--primary"
+      >
+        <span>Back to home</span>
+        <span class="kf404__arrow">→</span>
+      </a>
+
+      <a
+        href="{{ routes.all_products_collection_url }}"
+        class="kf404__button kf404__button--secondary"
+      >
+        Shop products
+      </a>
+
+    </div>
+
+    <div class="kf404__footer">
+      <span>Thoughtful tools.</span>
+      <span class="kf404__dot">•</span>
+      <span>Beautifully simple.</span>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* =========================================================
+   KITCHIFIX — PREMIUM 404
+   ========================================================= */
+
+.kf404 {
+  --kf-black: #0d0d0b;
+  --kf-black-soft: #141411;
+  --kf-cream: #f2eee5;
+  --kf-muted: #9b978d;
+  --kf-gold: #b39a6a;
+  --kf-gold-soft: rgba(179,154,106,.16);
+
+  position: relative;
+  min-height: min(820px, calc(100vh - 80px));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 100px 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(179,154,106,.055),
+      transparent 38%
+    ),
+    var(--kf-black);
+
+  color: var(--kf-cream);
+
+  text-align: center;
+
+  isolation: isolate;
+}
+
+
+/* ---------- CONTENT ---------- */
+
+.kf404__content {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  max-width: 820px;
+}
+
+
+/* ---------- 404 NUMBER ---------- */
+
+.kf404__number {
+  margin-bottom: -15px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: clamp(120px, 20vw, 260px);
+
+  font-weight: 800;
+
+  line-height: .72;
+
+  letter-spacing: -.095em;
+
+  color: rgba(179,154,106,.065);
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* ---------- EYEBROW ---------- */
+
+.kf404__eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 28px;
+
+  color: var(--kf-gold);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: .24em;
+
+  text-transform: uppercase;
+}
+
+.kf404__eyebrow span {
+  width: 28px;
+  height: 1px;
+
+  background: rgba(179,154,106,.5);
+}
+
+
+/* ---------- TITLE ---------- */
+
+.kf404__title {
+  margin: 0 0 25px;
+
+  color: var(--kf-cream);
+
+  font-family: inherit;
+
+  font-size: clamp(48px, 7vw, 88px);
+
+  font-weight: 500;
+
+  line-height: .98;
+
+  letter-spacing: -.055em;
+}
+
+.kf404__title em {
+  color: var(--kf-gold);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-weight: 400;
+
+  font-style: italic;
+
+  letter-spacing: -.045em;
+}
+
+
+/* ---------- DESCRIPTION ---------- */
+
+.kf404__text {
+  max-width: 560px;
+
+  margin: 0 auto 38px;
+
+  color: var(--kf-muted);
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+.kf404__actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.kf404__button {
+  min-height: 52px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+
+  padding: 0 22px;
+
+  border-radius: 2px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: .055em;
+
+  text-decoration: none;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease,
+    color .3s ease,
+    box-shadow .3s ease;
+}
+
+
+/* PRIMARY */
+
+.kf404__button--primary {
+  background: var(--kf-gold);
+
+  border: 1px solid var(--kf-gold);
+
+  color: #10100e;
+}
+
+.kf404__button--primary:hover {
+  background: #c4aa78;
+
+  border-color: #c4aa78;
+
+  color: #10100e;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.28);
+}
+
+
+/* SECONDARY */
+
+.kf404__button--secondary {
+  background: transparent;
+
+  border: 1px solid rgba(255,255,255,.16);
+
+  color: var(--kf-cream);
+}
+
+.kf404__button--secondary:hover {
+  border-color: var(--kf-gold);
+
+  color: var(--kf-gold);
+
+  transform: translateY(-3px);
+}
+
+
+/* ARROW */
+
+.kf404__arrow {
+  font-size: 18px;
+
+  line-height: 1;
+
+  transition: transform .3s ease;
+}
+
+.kf404__button--primary:hover .kf404__arrow {
+  transform: translateX(5px);
+}
+
+
+/* ---------- FOOTER LINE ---------- */
+
+.kf404__footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 70px;
+
+  color: rgba(242,238,229,.32);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+}
+
+.kf404__dot {
+  color: var(--kf-gold);
+}
+
+
+/* ---------- DECORATIVE RINGS ---------- */
+
+.kf404__ring {
+  position: absolute;
+
+  z-index: 1;
+
+  border: 1px solid rgba(179,154,106,.075);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.kf404__ring--one {
+  width: 680px;
+  height: 680px;
+
+  right: -310px;
+  top: -280px;
+
+  animation: kf404Float 12s ease-in-out infinite;
+}
+
+.kf404__ring--two {
+  width: 480px;
+  height: 480px;
+
+  left: -260px;
+  bottom: -250px;
+
+  animation: kf404Float 15s ease-in-out infinite reverse;
+}
+
+
+/* ---------- GLOW ---------- */
+
+.kf404__glow {
+  position: absolute;
+
+  z-index: 0;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(179,154,106,.09),
+    transparent 68%
+  );
+
+  pointer-events: none;
+
+  filter: blur(2px);
+}
+
+.kf404__glow--one {
+  top: 5%;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.kf404__glow--two {
+  right: -180px;
+  bottom: -220px;
+
+  opacity: .45;
+}
+
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes kf404Float {
+  0%,
+  100% {
+    transform: translate3d(0,0,0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0,14px,0) rotate(3deg);
+  }
+}
+
+
+/* ---------- ACCESSIBILITY ---------- */
+
+.kf404__button:focus-visible {
+  outline: 2px solid var(--kf-gold);
+
+  outline-offset: 4px;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media screen and (max-width: 600px) {
+
+  .kf404 {
+    min-height: calc(100vh - 70px);
+
+    padding: 75px 20px;
+  }
+
+  .kf404__number {
+    font-size: 115px;
+
+    margin-bottom: -8px;
+  }
+
+  .kf404__eyebrow {
+    gap: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: .18em;
+  }
+
+  .kf404__eyebrow span {
+    width: 16px;
+  }
+
+  .kf404__title {
+    font-size: clamp(42px, 12vw, 60px);
+
+    line-height: 1;
+  }
+
+  .kf404__text {
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+  }
+
+  .kf404__actions {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .kf404__button {
+    width: 100%;
+
+    min-height: 54px;
+  }
+
+  .kf404__footer {
+    margin-top: 45px;
+
+    font-size: 8px;
+
+    letter-spacing: .12em;
+  }
+
+  .kf404__ring--one {
+    width: 380px;
+    height: 380px;
+
+    right: -230px;
+    top: -120px;
+  }
+
+  .kf404__ring--two {
+    width: 300px;
+    height: 300px;
+
+    left: -190px;
+    bottom: -170px;
+  }
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .kf404__ring--one,
+  .kf404__ring--two {
+    animation: none;
+  }
+
+  .kf404__button {
+    transition: none;
+  }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "KitchiFix 404",
+  "settings": []
+}
+{% endschema %}
