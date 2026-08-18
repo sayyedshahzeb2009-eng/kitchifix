@@ -6,30 +6,20 @@
         "eyebrow": "KITCHIFIX • SMART KITCHEN ESSENTIALS",
         "heading": "Make your kitchen feel effortless.",
         "text": "Clever everyday products, beautifully designed to save space, time and effort.",
-        "primary_label": "Shop the collection",
-        "primary_link": "/collections/all",
-        "secondary_label": "Discover what’s new",
-        "secondary_link": "/collections/all?sort_by=created-descending"
+        "primary_label": "Explore best sellers",
+        "primary_link": "/pages/best-sellers",
+        "secondary_label": "View collections",
+        "secondary_link": "/collections"
       }
     },
     "trust": { "type": "trust-badges" },
-    "collection": {
+    "products": {
       "type": "featured-products",
-      "settings": {
-        "eyebrow": "THE KITCHIFIX COLLECTION",
-        "heading": "Designed for better kitchens",
-        "collection": "all",
-        "limit": 4,
-        "link": "/collections/all"
-      }
+      "settings": { "eyebrow": "THE KITCHIFIX EDIT", "heading": "Best sellers", "limit": 4, "link": "/pages/best-sellers" }
     },
     "new_arrivals": {
       "type": "new-arrivals",
-      "settings": {
-        "heading": "Fresh arrivals",
-        "text": "Discover the latest KitchiFix essentials, selected to bring a smarter, cleaner feel to your kitchen.",
-        "limit": 4
-      }
+      "settings": { "heading": "Fresh arrivals", "text": "The latest practical upgrades, selected for modern kitchens.", "limit": 4 }
     },
     "categories": {
       "type": "categories",
@@ -73,5 +63,5 @@
     },
     "newsletter": { "type": "newsletter" }
   },
-  "order": ["hero", "trust", "collection", "new_arrivals", "categories", "showcase", "problem", "reviews", "faq", "newsletter"]
+  "order": ["hero", "trust", "products", "new_arrivals", "categories", "showcase", "problem", "reviews", "faq", "newsletter"]
 }
