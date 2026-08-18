@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "brand-collection-page",
+      "settings": {
+        "eyebrow": "THE KITCHIFIX EDIT",
+        "heading": "Best Sellers",
+        "subheading": "The kitchen upgrades customers keep coming back for.",
+        "collection_handle": "all",
+        "sort": "best-selling",
+        "limit": 24
+      }
+    }
+  },
+  "order": ["main"]
+}
