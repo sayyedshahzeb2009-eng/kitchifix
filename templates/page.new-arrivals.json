@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "brand-collection-page",
+      "settings": {
+        "eyebrow": "JUST IN",
+        "heading": "New Arrivals",
+        "subheading": "Fresh, thoughtfully selected essentials for a more refined kitchen.",
+        "collection_handle": "all",
+        "sort": "created-descending",
+        "limit": 24
+      }
+    }
+  },
+  "order": ["main"]
+}
