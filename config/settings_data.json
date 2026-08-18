@@ -1,1 +1,13 @@
-{"current":{"brand_name":"KitchiFix","brand_tagline":"Smart finds for better kitchens","accent_color":"#111111","accent_color_2":"#D9FF5A","background_color":"#F6F5F1","text_color":"#111111","container_width":1320,"card_radius":22,"enable_3d":true}}
+{
+  "current": {
+    "brand_name": "KitchiFix",
+    "brand_tagline": "Smart finds for better kitchens",
+    "accent_color": "#B08D57",
+    "accent_color_2": "#D6C29A",
+    "background_color": "#F7F5F0",
+    "text_color": "#171716",
+    "container_width": 1280,
+    "card_radius": 14,
+    "enable_3d": true
+  }
+}
