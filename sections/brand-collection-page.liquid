@@ -1,0 +1,47 @@
+{% assign source_collection = collections[section.settings.collection_handle] %}
+{% if source_collection == blank %}{% assign source_collection = collections.all %}{% endif %}
+<section class="brand-collection-page">
+  <div class="brand-page-hero">
+    <div class="container brand-page-hero-inner">
+      <span class="brand-kicker">{{ section.settings.eyebrow }}</span>
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.subheading }}</p>
+      <div class="brand-page-rule"></div>
+    </div>
+  </div>
+
+  <div class="container brand-products-wrap">
+    <div class="brand-products-top">
+      <span>{{ source_collection.products_count }} pieces selected</span>
+      <span>Curated by KitchiFix</span>
+    </div>
+    <div class="product-grid brand-products-grid">
+      {% assign sorted_products = source_collection.products | sort: 'published_at' %}
+      {% if section.settings.sort == 'best-selling' %}
+        {% assign sorted_products = source_collection.products | sort: 'best_selling' %}
+      {% elsif section.settings.sort == 'created-descending' %}
+        {% assign sorted_products = source_collection.products | sort: 'created_at' | reverse %}
+      {% endif %}
+      {% for product in sorted_products limit: section.settings.limit %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+    {% if source_collection.products_count == 0 %}
+      <div class="brand-empty"><h2>Coming soon</h2><p>Our next KitchiFix edit is being prepared.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+.brand-collection-page{background:#0b0b09;color:#eee9de;min-height:70vh;padding-bottom:110px}
+.brand-page-hero{padding:120px 0 85px;text-align:center;background:radial-gradient(circle at 50% 10%,rgba(184,162,122,.16),transparent 38%),linear-gradient(180deg,#12110e,#0b0b09)}
+.brand-page-hero-inner{max-width:850px}.brand-kicker{display:inline-block;color:#b8a27a;font-size:10px;font-weight:900;letter-spacing:.25em;text-transform:uppercase;margin-bottom:22px}
+.brand-page-hero h1{font-size:clamp(52px,8vw,105px);line-height:.9;letter-spacing:-.075em;margin:0 0 24px;color:#f1eadf}
+.brand-page-hero p{max-width:620px;margin:auto;color:#918b7e;font-size:18px;line-height:1.7}.brand-page-rule{width:70px;height:1px;background:#b8a27a;margin:35px auto 0}
+.brand-products-wrap{padding-top:30px}.brand-products-top{display:flex;justify-content:space-between;border-bottom:1px solid rgba(233,226,210,.12);padding:0 0 18px;margin-bottom:24px;color:#918b7e;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.brand-products-grid{gap:20px}.brand-products-grid .product-card{background:#12120f;border-color:rgba(233,226,210,.12)}.brand-products-grid .product-body{background:#12120f;color:#eee9de}.brand-products-grid .product-short{color:#918b7e}.brand-products-grid .product-media{background:#181713}
+.brand-empty{text-align:center;padding:100px 20px;border:1px solid rgba(233,226,210,.12);border-radius:28px}.brand-empty h2{font-size:42px}.brand-empty p{color:#918b7e}
+@media(max-width:720px){.brand-page-hero{padding:85px 0 60px}.brand-page-hero p{font-size:15px}.brand-products-top{font-size:9px}.brand-collection-page{padding-bottom:70px}}
+</style>
+
+{% schema %}{"name":"Brand collection page","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"THE KITCHIFIX EDIT"},{"type":"text","id":"heading","label":"Heading","default":"Best Sellers"},{"type":"textarea","id":"subheading","label":"Subheading","default":"The kitchen upgrades customers keep coming back for."},{"type":"collection","id":"collection_handle","label":"Product collection"},{"type":"select","id":"sort","label":"Product order","options":[{"value":"best-selling","label":"Best selling"},{"value":"created-descending","label":"Newest first"}],"default":"best-selling"},{"type":"range","id":"limit","label":"Products","min":4,"max":24,"step":4,"default":24}],"presets":[{"name":"Brand collection page"}]}{% endschema %}
